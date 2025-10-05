@@ -21,18 +21,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
-    private List<PermissionEnum>  permissions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_"+role.name());
-        return List.of();
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.name());
+        return List.of(grantedAuthority);
     }
 
 
